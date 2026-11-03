@@ -45,6 +45,8 @@ npm run import:osm # OSMから各駅のカフェ候補を data/osm/ に取得（
 
 - `NEXT_PUBLIC_SITE_URL`：本番のURL（canonical・サイトマップ用）
 - `NEXT_PUBLIC_ALLOW_INDEX=1`：検索エンジンへの掲載を許可（試作中は未設定＝noindex）
+- `NEXT_PUBLIC_GA_ID`：GA4 の測定ID（G-から始まる）。設定すると全ページで計測
+- `NEXT_PUBLIC_GSC_VERIFICATION`：Search Console の「HTMLタグ」確認コード（content の値）。DNS で確認する場合は不要
 
 ## データの方針
 
