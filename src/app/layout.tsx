@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Fraunces, Shippori_Mincho_B1, Zen_Kaku_Gothic_New } from "next/font/google";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
@@ -10,12 +11,16 @@ const display = Shippori_Mincho_B1({ weight: ["700", "800"], subsets: ["latin"],
 const body = Zen_Kaku_Gothic_New({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--f-body", preload: false, display: "swap" });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+// GA4 測定ID（例: G-XXXXXXXXXX）と、Search Console の確認コード。未設定なら何も出力しない
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: `${BRAND.name}｜目的にあわせて行き先を提案する、東京のカフェ案内`, template: `%s｜${BRAND.name}` },
   description: "作業したい日、犬と出かける日。目的ごとに大事なポイントを確かめてスコアにした、東京のカフェ地図。",
   openGraph: { siteName: BRAND.name, locale: "ja_JP", type: "website" },
+  ...(GSC_VERIFICATION ? { verification: { google: GSC_VERIFICATION } } : {}),
 };
 
 export const viewport: Viewport = {
@@ -35,6 +40,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
+        {GA_ID ? (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+            <Script id="ga4" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
+            </Script>
+          </>
+        ) : null}
       </body>
     </html>
   );
