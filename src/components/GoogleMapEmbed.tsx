@@ -3,7 +3,8 @@
  * APIキーは NEXT_PUBLIC_GMAPS_EMBED_KEY（Google Cloudで「Maps Embed API」だけに制限したキー）。
  * キーが未設定のときは「Googleマップで開く」リンクだけ出す。
  */
-const KEY = process.env.NEXT_PUBLIC_GMAPS_EMBED_KEY;
+// 制限つきの公開キー（Maps Embed API のみ、thirdplace-tokyo.netlify.app からのみ有効）
+const KEY = process.env.NEXT_PUBLIC_GMAPS_EMBED_KEY ?? "AIzaSyAQMoGo__sg6OGDWkXKGcSlrNqMgrgpNsQ";
 
 export function GoogleMapEmbed({ name, address }: { name: string; address: string }) {
   const q = `${name} ${address}`;
