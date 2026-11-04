@@ -19,6 +19,10 @@ export type Listing = {
   facts: { label: string; value: string; src: number }[];
   sources: { label: string; url: string; official: boolean }[];
   note: string;
+  /** 自分たちで撮った写真（public/photos/ 以下）。他人の写真は入れない */
+  photos?: { src: string; alt: string }[];
+  /** お店の公式Instagramの投稿URL（埋め込み表示。画像はこちらに保存しない） */
+  instagram?: string[];
   checkedAt: string; // 公開情報を確認した日 YYYY-MM-DD
 };
 

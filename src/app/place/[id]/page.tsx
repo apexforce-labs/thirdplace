@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { listingById, listings } from "@/data/listings";
 import { stationBySlug } from "@/data/stations";
+import { PlacePhotos } from "@/components/PlacePhotos";
+import { GoogleMapEmbed } from "@/components/GoogleMapEmbed";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -42,6 +44,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
 
       <div className="spot-layout">
         <div>
+          <PlacePhotos l={l} />
           <div className="pending-box panel">
             <span className="pending-tag">スコア調査待ち</span>
             <p>Wi-Fiの速さ、電源のある席の数、静かさは、まだ現地で測っていません。測り次第、作業スコアを付けます。</p>
@@ -74,6 +77,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
           </section>
         </div>
         <aside>
+          <GoogleMapEmbed name={l.name} address={l.address} />
           <div className="side-card panel">
             <b>行ってみた方へ</b>
             <span>電源の場所やWi-Fiの速さ、混み具合を教えてください。確認してスコアに反映します。</span>
