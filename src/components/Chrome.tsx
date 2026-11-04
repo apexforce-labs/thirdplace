@@ -23,7 +23,7 @@ export function SiteHeader() {
       <div className="sample-band" role="note">
         <div className="wrap">
           <b>試作版</b>
-          <span>掲載中の店名・座席数などはすべて見本で、実在の店舗とは関係ありません。</span>
+          <span>スコア付きの店と地図は見本で、実在の店舗とは関係ありません。「実在のお店」欄だけが確認済みの情報です。</span>
         </div>
       </div>
     </>
