@@ -12,7 +12,7 @@ const body = Zen_Kaku_Gothic_New({ weight: ["400", "500", "700"], subsets: ["lat
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 // GA4 測定ID（例: G-XXXXXXXXXX）と、Search Console の確認コード。未設定なら何も出力しない
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-K3XLTN167W";
 const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 export const metadata: Metadata = {

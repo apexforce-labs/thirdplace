@@ -5,6 +5,8 @@ import { spotsByStation } from "@/data/spots";
 import { purposeBySlug, readyPurposes, relevant } from "@/lib/purposes";
 import type { PurposeSlug } from "@/lib/types";
 import { StationExplorer } from "@/components/StationExplorer";
+import { ListingList } from "@/components/ListingList";
+import { listingsByStation } from "@/data/listings";
 
 type Params = Promise<{ purpose: string; station: string }>;
 
@@ -30,5 +32,10 @@ export default async function Page({ params }: { params: Params }) {
   const { purpose, station } = await params;
   const p = purposeBySlug(purpose); const st = stationBySlug(station);
   if (!p?.ready || !st) notFound();
-  return <StationExplorer station={st} spots={spotsByStation(st.slug)} purpose={p.slug as PurposeSlug} />;
+  return (
+    <>
+      <ListingList items={listingsByStation(st.slug, p.slug as PurposeSlug)} stationName={st.name} />
+      <StationExplorer station={st} spots={spotsByStation(st.slug)} purpose={p.slug as PurposeSlug} />
+    </>
+  );
 }
