@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import type { Spot } from "@/lib/types";
+import type { Listing } from "@/data/listings";
 import { CafeTable, Dog, INK, Person, Stool } from "./People";
 
 const N = "#16204a";
@@ -84,7 +84,7 @@ function TokyoBackdrop() {
 }
 
 /** トップの舞台：青いパネルの上で、カフェで作業する人と犬と歩く人。スコアのカードが浮かぶ */
-export function HeroStage({ pick, score }: { pick: Spot; score: number }) {
+export function HeroStage({ pick, station, count }: { pick: Listing; station: string; count: number }) {
   return (
     <div className="stage" aria-label="カフェでノートPCを開く人と、犬と散歩する人のイラスト" role="img">
       <div className="stage-panel">
@@ -100,20 +100,16 @@ export function HeroStage({ pick, score }: { pick: Spot; score: number }) {
         <path d="M10 20 C60 110 140 110 190 70" fill="none" stroke={INK} strokeWidth="2.4" strokeDasharray="1 0" />
       </svg>
 
-      <Link href={`/spot/${pick.id}/`} className="float-card fc-score" style={{ "--r": "-5deg" } as CSSProperties}>
-        <span className="fc-num">{score}</span>
+      <Link href={`/place/${pick.id}/`} className="float-card fc-score" style={{ "--r": "-5deg" } as CSSProperties}>
+        <span className="fc-num fc-count">{count}</span>
         <span className="fc-body">
-          <small>AIのおすすめ・渋谷で作業</small>
+          <small>公式情報で確認した作業カフェ・{station}</small>
           <b>{pick.name}</b>
-          <span className="fc-bars" aria-hidden>
-            <i style={{ width: "92%", background: "#3b5bdb" }} />
-            <i style={{ width: "74%", background: "#ffc93c" }} />
-            <i style={{ width: "84%", background: "#5cc29a" }} />
-          </span>
+          <span className="fc-note">電源・Wi-Fi・席数を確認済み</span>
         </span>
       </Link>
-      <span className="float-chip fc-wifi" style={{ "--r": "6deg" } as CSSProperties}>Wi-Fi {pick.wifiMbps}Mbps</span>
-      <span className="float-chip fc-dog" style={{ "--r": "-4deg" } as CSSProperties}>犬も店内OK</span>
+      <span className="float-chip fc-wifi" style={{ "--r": "6deg" } as CSSProperties}>電源・Wi-Fiあり</span>
+      <span className="float-chip fc-dog" style={{ "--r": "-4deg" } as CSSProperties}>犬と行く店は準備中</span>
       <svg viewBox="0 0 40 40" className="spark sp1" aria-hidden><path d="M20 2 V14 M20 26 V38 M2 20 H14 M26 20 H38" stroke={INK} strokeWidth="3" strokeLinecap="round" /></svg>
       <svg viewBox="0 0 40 40" className="spark sp2" aria-hidden><path d="M20 4 L24 16 L36 20 L24 24 L20 36 L16 24 L4 20 L16 16 Z" fill="#ffc93c" stroke={INK} strokeWidth="2.4" strokeLinejoin="round" /></svg>
     </div>

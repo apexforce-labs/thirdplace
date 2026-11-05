@@ -1,11 +1,9 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import { stations } from "@/data/stations";
-import { spots, spotsByStation } from "@/data/spots";
+import { listings, listingById } from "@/data/listings";
 import { articles } from "@/data/articles";
-import { PURPOSES, purposeBySlug } from "@/lib/purposes";
-import { suggest } from "@/lib/suggest";
-import { BRAND } from "@/lib/brand";
+import { PURPOSES } from "@/lib/purposes";
 import { PurposeIcon } from "@/components/Icons";
 import { StationGrid } from "@/components/StationGrid";
 import { Buddy } from "@/components/Illustrations";
@@ -13,21 +11,21 @@ import { HeroStage } from "@/components/HeroStage";
 import { PurposeArt } from "@/components/PurposeArt";
 
 export default function Home() {
-  const work = purposeBySlug("work")!;
-  const pick = suggest(work, spotsByStation("shibuya"))!;
+  const pick = listingById("renoir-shibuya-miyashita-park") ?? listings[0];
+  const pickStation = stations.find((s) => s.slug === pick.station)!;
   return (
     <>
       <section className="hero2">
         <div className="wrap hero2-grid">
           <div className="hero2-copy">
-            <p className="hero2-eyebrow"><Buddy size={26} /> 東京の行き先を提案する、AIの相棒</p>
+            <p className="hero2-eyebrow"><Buddy size={26} /> 東京の駅ごとの、作業できるカフェ案内</p>
             <h1>
               きょうは、
               <br />
               どこで<em>過ごそう</em>。
             </h1>
             <p className="hero2-lead">
-              作業できるカフェも、犬と入れるお店も。Wi-Fiや電源、犬の入店や駐車場まで確かめた情報から、AIの相棒が東京の駅ごとに行き先を提案します。
+              電源はある？ Wi-Fiは？ 何時まで？ 作業できるカフェを、各店の公式情報で確かめて東京の駅ごとにまとめました。犬と行けるお店も準備中です。
             </p>
             <div className="answers" role="list" aria-label="目的をえらぶ">
               {PURPOSES.map((p) => {
@@ -47,7 +45,7 @@ export default function Home() {
               })}
             </div>
           </div>
-          <HeroStage pick={pick.spot} score={pick.score} />
+          <HeroStage pick={pick} station={`${pickStation.name}駅`} count={listings.length} />
         </div>
       </section>
 
@@ -81,7 +79,7 @@ export default function Home() {
       <section className="wrap section" id="stations">
         <div className="section-head">
           <h2>駅からさがす</h2>
-          <span className="eyebrow">{stations.length}駅・{spots.length}か所・数字は60点以上のお店</span>
+          <span className="eyebrow">{stations.length}駅・{listings.length}店・数字は掲載店数</span>
         </div>
         <StationGrid />
       </section>

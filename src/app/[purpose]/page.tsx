@@ -12,7 +12,7 @@ export function generateStaticParams() {
 }
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const p = purposeBySlug((await params).purpose);
-  return p ? { title: `東京で${p.name}ならここ`, description: `${p.lead}東京の駅ごとに比べられます。` } : {};
+  return p ? { title: `東京で${p.name}ならここ`, description: `${p.lead}電源やWi-Fiを公式情報で確かめたお店を、東京の駅ごとにまとめています。` } : {};
 }
 
 export default async function PurposePage({ params }: { params: Params }) {
@@ -24,7 +24,7 @@ export default async function PurposePage({ params }: { params: Params }) {
         <span className="ic"><PurposeIcon slug={p.slug} /></span>
         <div>
           <h1>{p.name}</h1>
-          <p>{p.lead}3つを確かめて、{p.scoreName}（100点満点）にしています。</p>
+          <p>{p.lead}まずは電源・Wi-Fi・席数・営業時間を公式情報で確かめたお店を載せています。スコア（100点満点）は現地で測ってから付けます。</p>
         </div>
       </div>
       <div className="section-head" style={{ marginTop: 32 }}><h2>駅をえらぶ</h2></div>

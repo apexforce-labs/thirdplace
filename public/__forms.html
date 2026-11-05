@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>forms</title></head>
+<body>
+<!-- Netlify Forms の検出用。実際の送信は src/components/SubmitForm.tsx から fetch で行う。項目は同じにそろえること -->
+<form name="submit-spot" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="submit-spot">
+  <input name="bot-field"><input name="shop"><select name="station"><option value="渋谷">渋谷</option><option value="新宿">新宿</option><option value="池袋">池袋</option><option value="東京">東京</option><option value="品川">品川</option><option value="恵比寿">恵比寿</option><option value="中目黒">中目黒</option><option value="吉祥寺">吉祥寺</option><option value="秋葉原">秋葉原</option><option value="横浜">横浜</option><option value="その他">その他</option></select>
+  <input type="checkbox" name="checks" value="電源がある"><input type="checkbox" name="checks" value="無料Wi-Fiがある"><input type="checkbox" name="checks" value="時間制限がない"><input type="checkbox" name="checks" value="閉店している"><input type="checkbox" name="checks" value="営業時間が変わった">
+  <input name="power"><textarea name="memo"></textarea><input type="email" name="email">
+</form>
+<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="contact">
+  <input name="bot-field"><input name="name"><input type="email" name="email"><textarea name="message"></textarea>
+</form>
+</body></html>

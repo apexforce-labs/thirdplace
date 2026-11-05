@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { articleBySlug, articles } from "@/data/articles";
-import { spotById } from "@/data/spots";
-import { SpotCard } from "@/components/SpotCard";
+import { listingById } from "@/data/listings";
+import { ListingList } from "@/components/ListingList";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -31,11 +31,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <div key={i}>
             {b.h && <h2>{b.h}</h2>}
             {b.p && <p>{b.p}</p>}
-            {b.spots && (
-              <div className="spot-list">
-                {b.spots.map((id) => spotById(id)).filter(Boolean).map((s) => <SpotCard key={s!.id} spot={s!} purpose="work" />)}
-              </div>
-            )}
+            {b.listings && <ListingList items={b.listings.map((id) => listingById(id)).filter((l) => l !== undefined)} />}
           </div>
         ))}
         {a.station && (

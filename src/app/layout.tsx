@@ -17,8 +17,8 @@ const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: `${BRAND.name}｜目的にあわせて行き先を提案する、東京のカフェ案内`, template: `%s｜${BRAND.name}` },
-  description: "作業したい日、犬と出かける日。目的ごとに大事なポイントを確かめてスコアにした、東京のカフェ地図。",
+  title: { default: `${BRAND.name}｜電源・Wi-Fiを確かめた、東京の作業カフェ案内`, template: `%s｜${BRAND.name}` },
+  description: "電源・Wi-Fi・席数・営業時間を公式情報で確かめた、東京の駅ごとの作業カフェ案内。",
   openGraph: { siteName: BRAND.name, locale: "ja_JP", type: "website" },
   ...(GSC_VERIFICATION ? { verification: { google: GSC_VERIFICATION } } : {}),
 };
