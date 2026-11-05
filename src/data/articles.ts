@@ -15,7 +15,7 @@ export const articles: Article[] = [
       { p: "ランチの波が引いたあとから夕方までが、もっとも席を取りやすい時間帯です。土日はこの時間だけ時間制限を設ける店もあるので、行く前に店頭やお店の案内を確認してください。" },
       { h: "3. 電源の位置を先に確認する" },
       { p: "同じ店でも、電源があるのは壁沿いやカウンターだけということがよくあります。各店のページには公式情報で確かめた電源の有無を載せています。席の場所は、入店時にお店の人に聞くのが確実です。" },
-      { h: "渋谷で電源のあるお店（公式情報で確認）", listings: ["renoir-shibuya-miyashita-park", "renoir-shibuya-minamiguchi", "caferenoir-shibuya-higashiguchi-ekimae"] },
+      { h: "渋谷で電源のあるお店（公式情報で確認）", listings: ["excelsior-shibuya-miyamasuzaka", "doutor-shibuya-shin-minamiguchi", "renoir-shibuya-miyashita-park"] },
     ],
   },
   {
