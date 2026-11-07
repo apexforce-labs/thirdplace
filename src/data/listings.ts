@@ -5,6 +5,17 @@ import type { PurposeSlug } from "@/lib/types";
  * スコアは現地で実測するまで付けない。ここに載せるのは出典で確認できた事実だけ。
  * fact.src は sources の何番目で確認したか（0始まり）。
  */
+/** 作業スコアの6項目（レーダーチャートの軸の順） */
+export const SCORE_AXES = [
+  { key: "wifi", label: "Wi-Fi" },
+  { key: "power", label: "電源" },
+  { key: "seats", label: "席・机" },
+  { key: "vacancy", label: "空いている" },
+  { key: "quiet", label: "静か・雰囲気" },
+  { key: "stay", label: "長居しやすさ" },
+] as const;
+export type ScoreKey = (typeof SCORE_AXES)[number]["key"];
+
 export type Listing = {
   id: string;
   name: string;
@@ -24,6 +35,8 @@ export type Listing = {
   /** お店の公式Instagramの投稿URL（埋め込み表示。画像はこちらに保存しない） */
   instagram?: string[];
   checkedAt: string; // 公開情報を確認した日 YYYY-MM-DD
+  /** 現地で測った作業スコア（各1〜5）。測っていない項目は書かない。仮の値は入れない */
+  scores?: Partial<Record<ScoreKey, number>>;
 };
 
 const RENOIR_WIFI = { label: "Renoir Miyama Wi-Fi（公式）", url: "https://ginza-renoir.co.jp/wifi_en", official: true };

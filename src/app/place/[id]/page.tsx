@@ -5,6 +5,7 @@ import { listingById, listings } from "@/data/listings";
 import { stationBySlug } from "@/data/stations";
 import { PlacePhotos } from "@/components/PlacePhotos";
 import { GoogleMapEmbed } from "@/components/GoogleMapEmbed";
+import { ScoreRadar } from "@/components/ScoreRadar";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -45,10 +46,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
       <div className="spot-layout">
         <div>
           <PlacePhotos l={l} />
-          <div className="pending-box panel">
-            <span className="pending-tag">スコア調査待ち</span>
-            <p>Wi-Fiの速さ、電源のある席の数、静かさは、まだ現地で測っていません。測り次第、作業スコアを付けます。</p>
-          </div>
+          <ScoreRadar scores={l.scores} />
           <section className="detail panel" aria-label="確認できた情報">
             <dl>
               <dt>住所</dt><dd>{l.address}</dd>
