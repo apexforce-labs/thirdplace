@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { articles } from "@/data/articles";
 
-export const metadata: Metadata = { title: "読みもの", description: "作業できるカフェの選び方、駅ごとのまとめ。" };
+export const metadata: Metadata = { title: "読みもの", description: "作業できるカフェの選び方、駅ごとのまとめ。", alternates: { canonical: "/articles/" } };
 
 export default function Articles() {
   return (

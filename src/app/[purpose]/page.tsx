@@ -12,7 +12,7 @@ export function generateStaticParams() {
 }
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const p = purposeBySlug((await params).purpose);
-  return p ? { title: `東京で${p.name}ならここ`, description: `${p.lead}電源やWi-Fiを公式情報で確かめたお店を、東京の駅ごとにまとめています。` } : {};
+  return p ? { title: `東京で${p.name}ならここ`, description: `${p.lead}電源やWi-Fiを公式情報で確かめたお店を、東京の駅ごとにまとめています。`, alternates: { canonical: `/${p.slug}/` } } : {};
 }
 
 export default async function PurposePage({ params }: { params: Params }) {

@@ -5,7 +5,7 @@ import { listings } from "@/data/listings";
 import { readyPurposes } from "@/lib/purposes";
 
 export const dynamic = "force-static";
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thirdplace.apexforce.co";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
