@@ -1,12 +1,11 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import { stations } from "@/data/stations";
-import { spotsByStation } from "@/data/spots";
-import { purposeScore, readyPurposes, relevant, type Purpose } from "@/lib/purposes";
+import { listingsByStation } from "@/data/listings";
+import { readyPurposes, type Purpose } from "@/lib/purposes";
+import type { PurposeSlug } from "@/lib/types";
 
-const good = (p: Purpose, slug: string) => spotsByStation(slug).filter((s) => relevant(p, s) && purposeScore(p, s) >= 60).length;
-
-/** 駅名標の形をした駅カード。only を渡すとその目的だけにリンクする */
+/** 駅名標の形をした駅カード。数字はその駅の掲載店数。only を渡すとその目的だけにリンクする */
 export function StationGrid({ only }: { only?: Purpose }) {
   const list = only ? [only] : readyPurposes;
   return (
@@ -21,7 +20,7 @@ export function StationGrid({ only }: { only?: Purpose }) {
           <span className="band">
             {list.map((p) => (
               <Link key={p.slug} href={`/${p.slug}/${s.slug}/`}>
-                {p.name.replace("カフェ", "")} <span className="num">{good(p, s.slug)}</span>
+                {p.name.replace("カフェ", "")} <span className="num">{listingsByStation(s.slug, p.slug as PurposeSlug).length}</span>
               </Link>
             ))}
           </span>

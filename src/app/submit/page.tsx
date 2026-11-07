@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SubmitForm } from "@/components/SubmitForm";
 
-export const metadata: Metadata = { title: "情報を送る", description: "作業できるカフェの情報や、掲載内容の修正を送ってください。" };
+export const metadata: Metadata = { title: "情報を送る", description: "作業できるカフェの情報や、掲載内容の修正を送ってください。", alternates: { canonical: "/submit/" } };
 
 export default function Submit() {
   return (

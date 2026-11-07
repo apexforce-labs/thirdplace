@@ -49,5 +49,5 @@ export type Article = {
   station?: string;
   publishedAt: string;
   readMin: number;
-  body: { h?: string; p?: string; spots?: string[] }[];
+  body: { h?: string; p?: string; listings?: string[] }[];
 };

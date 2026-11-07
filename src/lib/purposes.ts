@@ -66,7 +66,7 @@ export const PURPOSES: Purpose[] = [
     scoreName: "わんこスコア",
     color: "var(--p-dog)",
     soft: "var(--p-dog-soft)",
-    ready: true,
+    ready: false, // 実在店の調査がそろうまで準備中
     lead: "店内に入れるか、犬用ごはんがあるか、車で行けるか。",
     axes: [
       { key: "entry", label: "犬の入店", color: "var(--c-dog)", weight: 0.5, score: dogEntryScore,

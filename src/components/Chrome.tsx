@@ -14,18 +14,11 @@ export function SiteHeader() {
           </Link>
           <nav className="nav" aria-label="メイン">
             <Link href="/work/" className="hide-sm">カフェ作業</Link>
-            <Link href="/dog/" className="hide-sm">犬と行く</Link>
             <Link href="/articles/" className="hide-sm">読みもの</Link>
             <Link href="/submit/" className="btn">お店を教える</Link>
           </nav>
         </div>
       </header>
-      <div className="sample-band" role="note">
-        <div className="wrap">
-          <b>試作版</b>
-          <span>掲載中の店名・座席数などはすべて見本で、実在の店舗とは関係ありません。</span>
-        </div>
-      </div>
     </>
   );
 }
@@ -40,8 +33,11 @@ export function SiteFooter() {
           <Link href="/about/">このサイトについて</Link>
           <Link href="/submit/">情報の追加・修正</Link>
           <Link href="/articles/">読みもの</Link>
+          <Link href="/privacy/">プライバシーポリシー</Link>
+          <Link href="/contact/">お問い合わせ</Link>
         </div>
-        <p>地図データ © OpenStreetMap contributors。人物イラスト：Open Peeps by Pablo Stanley（CC0）。店舗情報は運営による調査と利用者からの投稿をもとにしています。</p>
+        <p>地図データ © OpenStreetMap contributors。人物イラスト：Open Peeps by Pablo Stanley（CC0）。店舗情報は各店の公式情報をもとに運営が確認しています。営業時間などは変わることがあるので、お出かけ前に公式情報をご確認ください。</p>
+        <p>運営：apexforce（<a href="https://apexforce.co" target="_blank" rel="noopener noreferrer">apexforce.co</a>）</p>
         <p>© 2026 {BRAND.name}</p>
       </div>
     </footer>
