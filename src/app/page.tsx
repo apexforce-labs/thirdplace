@@ -6,7 +6,7 @@ import { articles } from "@/data/articles";
 import { PURPOSES } from "@/lib/purposes";
 import { PurposeIcon } from "@/components/Icons";
 import { StationGrid } from "@/components/StationGrid";
-import { Buddy } from "@/components/Illustrations";
+import { CupMark } from "@/components/Illustrations";
 import { HeroStage } from "@/components/HeroStage";
 import { PurposeArt } from "@/components/PurposeArt";
 
@@ -18,7 +18,7 @@ export default function Home() {
       <section className="hero2">
         <div className="wrap hero2-grid">
           <div className="hero2-copy">
-            <p className="hero2-eyebrow"><Buddy size={26} /> 東京の駅ごとの、作業できるカフェ案内</p>
+            <p className="hero2-eyebrow"><CupMark size={26} /> 東京の駅ごとの、作業できるカフェ案内</p>
             <h1>
               きょうは、
               <br />
