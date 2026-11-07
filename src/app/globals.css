@@ -597,8 +597,6 @@ a.purpose-card:hover { transform: translateY(-3px); box-shadow: 6px 6px 0 var(--
 .listing-card .facts { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13px; }
 .listing-card .facts b { font-weight: 700; margin-right: 6px; }
 .pending-tag { justify-self: start; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 99px; border: 1.5px dashed var(--ink-3); color: var(--ink-2, var(--ink)); }
-.pending-box { display: grid; gap: 8px; padding: 16px; }
-.pending-box p { font-size: 14px; color: var(--ink-2, var(--ink)); }
 .place .sources { margin-top: 24px; display: grid; gap: 8px; }
 .place .sources h2 { font-size: 16px; }
 .place .sources ol { margin: 0; padding-left: 1.4em; display: grid; gap: 4px; font-size: 14px; }
@@ -648,3 +646,18 @@ a.purpose-card:hover { transform: translateY(-3px); box-shadow: 6px 6px 0 var(--
 .article .listing-grid { margin-block: 12px 4px; }
 .listing-map.fallback-map { position: relative; inset: auto; }
 @media (min-width: 960px) { .station-layout .listing-map.fallback-map { position: sticky; } }
+
+/* 作業スコアのレーダーチャート */
+.score-radar { display: grid; gap: 8px; padding: 16px; margin: 0; }
+.score-radar figcaption { display: flex; align-items: center; gap: 10px; }
+.score-radar figcaption b { font-size: 15px; }
+.score-radar svg { width: 100%; max-width: 440px; justify-self: center; overflow: visible; }
+.score-radar p { font-size: 13px; color: var(--ink-2, var(--ink)); margin: 0; }
+.sr-ring { fill: none; stroke: var(--hair); stroke-width: 1; }
+.sr-axis { stroke: var(--ink-3); stroke-width: 1.2; }
+.sr-axis.is-empty { stroke-dasharray: 4 4; }
+.sr-area { fill: var(--c-work, #3b5bdb); fill-opacity: .18; stroke: var(--c-work, #3b5bdb); stroke-width: 2; stroke-linejoin: round; }
+.sr-dot { fill: var(--c-work, #3b5bdb); }
+.sr-label { fill: var(--ink); font-size: 13px; font-weight: 700; }
+.sr-val { fill: var(--ink-2, var(--ink)); font-size: 12px; font-weight: 500; }
+.sr-val.is-empty { fill: var(--ink-3); }
