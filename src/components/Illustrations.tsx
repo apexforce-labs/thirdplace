@@ -17,19 +17,14 @@ const BROWN = "#9b7656";
 
 const s = { stroke: L, strokeWidth: SW, strokeLinejoin: "round" as const, strokeLinecap: "round" as const };
 
-/** 相棒AI「ミチカ」：画面の顔をした小さなロボット（線画） */
-export function Buddy({ size = 64 }: { size?: number; wave?: boolean }) {
+/** ロゴマーク：湯気の立つコーヒーカップ（線画） */
+export function CupMark({ size = 64 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden className="buddy">
-      <path d="M32 8 V14" {...s} />
-      <circle cx="32" cy="6" r="3" fill={YEL} {...s} />
-      <rect x="9" y="14" width="46" height="38" rx="14" fill="#ffffff" {...s} />
-      <rect x="15" y="20" width="34" height="24" rx="9" fill="#2f5fae" {...s} />
-      <circle cx="25" cy="31" r="3" fill="#ffffff" />
-      <circle cx="39" cy="31" r="3" fill="#ffffff" />
-      <path d="M27 37 q5 4 10 0" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" />
-      <path d="M9 30 h-3 M55 30 h3" {...s} />
-      <path d="M22 52 v5 M42 52 v5" {...s} />
+    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden className="cup-mark">
+      <path d="M24 8 q-4 5 0 10 M33 6 q-4 6 0 12 M42 8 q-4 5 0 10" fill="none" {...s} />
+      <path d="M12 24 H48 V38 a16 16 0 0 1 -16 16 H28 a16 16 0 0 1 -16 -16 Z" fill="#2f5fae" {...s} />
+      <path d="M48 28 h4 a7 7 0 0 1 0 14 h-5" fill="none" {...s} />
+      <path d="M8 58 H52" {...s} />
     </svg>
   );
 }

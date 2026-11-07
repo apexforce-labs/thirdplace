@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Buddy, SkylineStrip } from "./Illustrations";
+import { CupMark, SkylineStrip } from "./Illustrations";
 import { BRAND } from "@/lib/brand";
 
 export function SiteHeader() {
@@ -8,7 +8,7 @@ export function SiteHeader() {
       <header className="site-header">
         <div className="wrap">
           <Link href="/" className="logo" aria-label={`${BRAND.name} トップへ`}>
-            <Buddy size={32} />
+            <CupMark size={32} />
             <span className="wordmark">Third <em>place</em></span>
             <small>{BRAND.tagline}</small>
           </Link>
