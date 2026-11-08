@@ -44,9 +44,11 @@ npm run import:osm # OSMから各駅のカフェ候補を data/osm/ に取得（
 環境変数
 
 - `NEXT_PUBLIC_SITE_URL`：本番のURL（canonical・サイトマップ用）
-- `NEXT_PUBLIC_ALLOW_INDEX=1`：検索エンジンへの掲載を許可（試作中は未設定＝noindex）
+- `NEXT_PUBLIC_ALLOW_INDEX=0`：検索エンジンから隠す（未設定なら掲載を許可）
 - `NEXT_PUBLIC_GA_ID`：GA4 の測定ID（G-から始まる）。設定すると全ページで計測
-- `NEXT_PUBLIC_GSC_VERIFICATION`：Search Console の「HTMLタグ」確認コード（content の値）。DNS で確認する場合は不要
+- `NEXT_PUBLIC_GSC_VERIFICATION`：Search Console の「HTMLタグ」確認コード（content の値）。未設定ならコード内の既定値を使う
+
+Netlify は無料プランのため、本番に反映されるのは apexforce-labs アカウントのコミット（GitHub の画面で押したマージなど）だけ。
 
 ## データの方針
 
