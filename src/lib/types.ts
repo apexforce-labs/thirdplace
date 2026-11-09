@@ -49,5 +49,8 @@ export type Article = {
   station?: string;
   publishedAt: string;
   readMin: number;
-  body: { h?: string; p?: string; listings?: string[] }[];
+  /** 本文。h＋points（箇条書き）を四角の枠で表示する。p は短い補足だけに使う */
+  body: { h?: string; icon?: ArticleIcon; p?: string; points?: string[]; listings?: string[] }[];
 };
+
+export type ArticleIcon = "power" | "wifi" | "clock" | "seat" | "smoke" | "info";
