@@ -48,7 +48,7 @@ npm run import:osm # OSMから各駅のカフェ候補を data/osm/ に取得（
 - `NEXT_PUBLIC_GA_ID`：GA4 の測定ID（G-から始まる）。設定すると全ページで計測
 - `NEXT_PUBLIC_GSC_VERIFICATION`：Search Console の「HTMLタグ」確認コード（content の値）。未設定ならコード内の既定値を使う
 
-Netlify は無料プランのため、本番に反映されるのは apexforce-labs アカウントのコミット（GitHub の画面で押したマージなど）だけ。
+リポジトリは公開（Public）にしているため、Netlify の無料プランでも、どのアカウントのマージでも本番に反映される。
 
 ## データの方針
 
