@@ -2,6 +2,22 @@ import type { Article } from "@/lib/types";
 
 export const articles: Article[] = [
   {
+    slug: "shibuya-power-wifi-cafe",
+    title: "渋谷駅で電源・Wi-Fiのある作業カフェ11店｜公式情報で確認",
+    lead: "渋谷駅で作業できるカフェ11店を、公式情報だけで比べました。",
+    station: "shibuya",
+    publishedAt: "2026-11-12",
+    readMin: 2,
+    body: [
+      { h: "電源が公式に書かれている店は5店", icon: "power", points: ["カフェ・ベローチェ 渋谷二丁目店・松濤店（お客様専用コンセント）", "エクセルシオール カフェ 渋谷宮益坂店、ドトール 渋谷新南口店（コンセントあり）", "喫茶室ルノアール 渋谷宮下公園店（電源サービスあり）", "ほかの6店は公式に記載なし。使えるかは店舗で確認"] },
+      { h: "Wi-Fiは10店で公式に記載あり", icon: "wifi", points: ["TOWER RECORDS CAFE 以外の10店は、公式ページでWi-Fiを確認", "ルノアールの無料Wi-Fiは1日3時間まで"] },
+      { h: "朝早く・夜遅くに使いたいとき", icon: "clock", points: ["朝6時45分から：エクセルシオール 宮益坂店、ドトール 新南口店（平日）", "朝7時から：ベローチェ2店、サンマルクカフェ2店", "夜いちばん遅いのはサンマルクカフェ2店の23時（L.O. 22:30）", "22時まで：ルノアール、エクセルシオール、ベローチェ 松濤店、TOWER RECORDS CAFE", "PRONTO 渋谷店のカフェ営業は17時29分まで"] },
+      { h: "席の多さ・たばこで選ぶなら", icon: "seat", points: ["サンマルクカフェ 渋谷公園通り店：141席、全席禁煙", "サンマルクカフェ 渋谷道玄坂店：101席", "喫茶室ルノアール 渋谷宮下公園店：禁煙64席・加熱式たばこ専用30席", "エクセルシオール 宮益坂店は全53席、ドトール 新南口店は全33席が禁煙"] },
+      { h: "渋谷駅で作業できるお店", listings: ["veloce-shibuya-2chome", "veloce-shibuya-shoto", "excelsior-shibuya-miyamasuzaka", "doutor-shibuya-shin-minamiguchi", "renoir-shibuya-miyashita-park", "saint-marc-shibuya-koen-dori", "saint-marc-shibuya-dogenzaka", "pronto-shibuya", "tullys-shibuya-dogenzaka", "blue-bottle-shibuya", "tower-records-cafe-shibuya"] },
+      { p: "営業時間や設備は変わることがあります。お出かけ前に、各店のページの出典から公式情報を確認してください。" },
+    ],
+  },
+  {
     slug: "ebisu-power-wifi-cafe",
     title: "恵比寿駅で電源・Wi-Fiのある作業カフェ7店｜公式情報で確認",
     lead: "恵比寿駅で作業できるカフェ7店を、公式情報だけで比べました。",

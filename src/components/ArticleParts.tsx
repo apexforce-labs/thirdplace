@@ -4,9 +4,14 @@ import type { Listing } from "@/data/listings";
 const fact = (l: Listing, label: string) => l.facts.find((f) => f.label === label)?.value;
 /** 公式に「ある」と書かれているか（記載なし・紹介記事だけの情報は数えない） */
 const officialYes = (v?: string) => !!v && !/記載なし|紹介記事/.test(v);
+/** 席数。「全N席」があればそれ、なければ「禁煙64席・加熱式たばこ専用30席」のような内訳を合計する */
 const seatsOf = (l: Listing) => {
-  const m = fact(l, "席数")?.match(/(\d+)\s*席/);
-  return m ? Number(m[1]) : undefined;
+  const v = fact(l, "席数");
+  if (!v) return undefined;
+  const all = v.match(/全\s*(\d+)\s*席/);
+  if (all) return Number(all[1]);
+  const parts = [...v.matchAll(/(\d+)\s*席/g)].map((m) => Number(m[1]));
+  return parts.length ? parts.reduce((a, b) => a + b, 0) : undefined;
 };
 
 const ic = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 2.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
