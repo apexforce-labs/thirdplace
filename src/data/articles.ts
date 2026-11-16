@@ -2,6 +2,22 @@ import type { Article } from "@/lib/types";
 
 export const articles: Article[] = [
   {
+    slug: "yokohama-power-wifi-cafe",
+    title: "横浜駅で電源・Wi-Fiのある作業カフェ6店｜公式情報で確認",
+    lead: "横浜駅で作業できるカフェ6店を、公式情報だけで比べました。",
+    station: "yokohama",
+    publishedAt: "2026-11-16",
+    readMin: 2,
+    body: [
+      { h: "電源が公式に書かれている店は2店", icon: "power", points: ["喫茶室ルノアール 横浜西口北幸店（電源サービスあり）", "ドトール 横浜南幸店（コンセントあり）", "ほかの4店は公式に記載なし。使えるかは店舗で確認"] },
+      { h: "Wi-Fiは6店すべてにある", icon: "wifi", points: ["6店とも、公式ページでWi-Fiの記載を確認", "ルノアールの無料Wi-Fiは1日3時間まで"] },
+      { h: "朝早く・夜遅くに使いたいとき", icon: "clock", points: ["いちばん早いのはドトール 横浜南幸店の朝6時半", "朝7時から：ドトール 横浜駅店・ジョイナス店、エクセルシオール 横浜エキニア店", "22時まで：ルノアール、ドトール 横浜駅店・ジョイナス店・南幸店（平日）", "エクセルシオール 横浜エキニア店は20時半まで", "ドトール 横浜東口店の日祝は8時〜20時"] },
+      { h: "席の多さ・たばこで選ぶなら", icon: "smoke", points: ["喫茶室ルノアール 横浜西口北幸店：禁煙70席・加熱式たばこ専用32席", "ドトール 横浜東口店：全99席（禁煙55席・喫煙44席）", "ドトール 横浜南幸店：全85席（禁煙58席・喫煙27席）", "全席禁煙はドトール 横浜駅店（63席）"] },
+      { h: "横浜駅で作業できるお店", listings: ["renoir-yokohama-nishiguchi-kitasaiwai", "doutor-yokohama-minamisaiwai", "doutor-yokohama-eki", "doutor-yokohama-joinus", "doutor-yokohama-higashiguchi", "excelsior-yokohama-ekinia"] },
+      { p: "営業時間や設備は変わることがあります。お出かけ前に、各店のページの出典から公式情報を確認してください。" },
+    ],
+  },
+  {
     slug: "shibuya-power-wifi-cafe",
     title: "渋谷駅で電源・Wi-Fiのある作業カフェ11店｜公式情報で確認",
     lead: "渋谷駅で作業できるカフェ11店を、公式情報だけで比べました。",
