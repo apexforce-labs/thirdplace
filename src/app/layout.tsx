@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Fraunces, Shippori_Mincho_B1, Zen_Kaku_Gothic_New } from "next/font/google";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 import { SiteFooter, SiteHeader } from "@/components/Chrome";
 import { BRAND } from "@/lib/brand";
 
-const latin = Fraunces({ weight: ["700", "900"], style: ["normal", "italic"], subsets: ["latin"], variable: "--f-latin", display: "swap" });
-const display = Shippori_Mincho_B1({ weight: ["700", "800"], subsets: ["latin"], variable: "--f-display", preload: false, display: "swap" });
-const body = Zen_Kaku_Gothic_New({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--f-body", preload: false, display: "swap" });
+// Webフォントはブラウザで Google Fonts から読み込む（ビルド時に取りに行くと、
+// Google Fonts の応答しだいでビルドが落ちることがあるため）
+const FONTS_CSS =
+  "https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700;1,900&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thirdplace.apexforce.co";
 // GA4 測定ID（例: G-XXXXXXXXXX）と、Search Console の確認コード。未設定なら何も出力しない
@@ -36,7 +36,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={`${latin.variable} ${display.variable} ${body.variable}`}>
+    <html lang="ja">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href={FONTS_CSS} />
+      </head>
       <body>
         <SiteHeader />
         <main>{children}</main>
