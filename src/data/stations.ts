@@ -1,6 +1,6 @@
 import type { Station } from "@/lib/types";
 
-// 最初の10駅。座標は駅のおおよその中心。
+// 駅の一覧。座標は駅のおおよその中心。
 export const stations: Station[] = [
   { slug: "shibuya", romaji: "Shibuya", lineColor: "#80C241", name: "渋谷", kana: "しぶや", lines: ["JR山手線", "東急東横線", "東京メトロ銀座線"], lat: 35.658, lng: 139.7016, blurb: "再開発で新しいビルが増えたエリア。駅の東西で雰囲気が大きく変わる。" },
   { slug: "shinjuku", romaji: "Shinjuku", lineColor: "#80C241", name: "新宿", kana: "しんじゅく", lines: ["JR山手線", "小田急線", "京王線"], lat: 35.6896, lng: 139.7006, blurb: "乗り換えの合間にも使える。出口が多いので、どの口から近いかで選ぶ。" },
@@ -12,6 +12,8 @@ export const stations: Station[] = [
   { slug: "kichijoji", romaji: "Kichijoji", lineColor: "#F15A22", name: "吉祥寺", kana: "きちじょうじ", lines: ["JR中央線", "京王井の頭線"], lat: 35.7031, lng: 139.5798, blurb: "個人経営の店が多い街。公園帰りの犬連れも多い。" },
   { slug: "akihabara", romaji: "Akihabara", lineColor: "#80C241", name: "秋葉原", kana: "あきはばら", lines: ["JR山手線", "JR総武線", "つくばエクスプレス"], lat: 35.6984, lng: 139.7731, blurb: "電気街と昭和通り側で客層が変わる。夜遅くまで開く店も探せる。" },
   { slug: "yokohama", romaji: "Yokohama", lineColor: "#00B2E5", name: "横浜", kana: "よこはま", lines: ["JR東海道線", "東急東横線", "相鉄線"], lat: 35.4658, lng: 139.6223, blurb: "西口と東口で商業施設が分かれる。乗り換えついでに寄りやすい。" },
+  { slug: "takadanobaba", romaji: "Takadanobaba", lineColor: "#80C241", name: "高田馬場", kana: "たかだのばば", lines: ["JR山手線", "西武新宿線", "東京メトロ東西線"], lat: 35.7128, lng: 139.7038, blurb: "大学や専門学校が多い学生の街。早稲田通り沿いに店が集まる。" },
+  { slug: "gotanda", romaji: "Gotanda", lineColor: "#80C241", name: "五反田", kana: "ごたんだ", lines: ["JR山手線", "東急池上線", "都営浅草線"], lat: 35.6262, lng: 139.7236, blurb: "スタートアップのオフィスが多いエリア。西口側に店が多い。" },
 ];
 
 export const stationBySlug = (slug: string) => stations.find((s) => s.slug === slug);
