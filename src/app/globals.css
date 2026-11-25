@@ -701,3 +701,10 @@ a.purpose-card:hover { transform: translateY(-3px); box-shadow: 6px 6px 0 var(--
 .art-box li::before { content: ""; position: absolute; left: 4px; top: .7em; width: 8px; height: 8px; border-radius: 50%; background: var(--bc); border: 1.5px solid var(--ink); }
 .art-box p { margin-top: 10px; font-size: 14.5px; line-height: 1.8; color: var(--ink-2); }
 .art-foot { margin-top: 24px !important; padding: 12px 14px; border-radius: 12px; background: var(--tint); font-size: 13px !important; line-height: 1.7 !important; color: var(--ink-2); }
+
+/* 駅ページ：この駅の読みもの */
+.station-articles { margin-top: 40px; }
+.station-articles h2 { font-size: 20px; margin-bottom: 12px; }
+.station-articles ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.station-articles a { display: block; padding: 14px 16px; border: 2px solid var(--ink); border-radius: 14px; background: var(--bg); font-weight: 700; line-height: 1.5; box-shadow: 3px 3px 0 var(--ink); }
+.station-articles a:hover { transform: translate(-1px, -1px); }
