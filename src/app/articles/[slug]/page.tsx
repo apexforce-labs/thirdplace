@@ -59,7 +59,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         })}
         {a.station && (
           <p style={{ marginTop: 36 }}>
-            <Link href={`/work/${a.station}/`} className="btn">地図で探す</Link>
+            <Link href={`/work/${a.station}/`} className="btn">{station ? `${station.name}駅の作業カフェをすべて見る` : "地図で探す"}</Link>
           </p>
         )}
       </article>

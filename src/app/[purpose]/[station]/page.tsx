@@ -8,6 +8,7 @@ import type { PurposeSlug } from "@/lib/types";
 import { ListingList } from "@/components/ListingList";
 import { ListingMap } from "@/components/ListingMap";
 import { listingsByStation } from "@/data/listings";
+import { articles } from "@/data/articles";
 
 type Params = Promise<{ purpose: string; station: string }>;
 
@@ -33,6 +34,7 @@ export default async function Page({ params }: { params: Params }) {
   const p = purposeBySlug(purpose); const st = stationBySlug(station);
   if (!p?.ready || !st) notFound();
   const items = listingsByStation(st.slug, p.slug as PurposeSlug);
+  const related = articles.filter((a) => a.station === st.slug);
   return (
     <div className="wrap station-page">
       <nav className="crumbs" aria-label="パンくず">
@@ -52,6 +54,16 @@ export default async function Page({ params }: { params: Params }) {
         <ListingMap center={{ lat: st.lat, lng: st.lng, label: st.name }} points={items.map((l, i) => ({ id: l.id, name: l.name, lat: l.lat, lng: l.lng, n: i + 1 }))} />
         <ListingList items={items} />
       </div>
+      {related.length > 0 && (
+        <nav className="station-articles" aria-label={`${st.name}駅の読みもの`}>
+          <h2>{st.name}駅の読みもの</h2>
+          <ul>
+            {related.map((a) => (
+              <li key={a.slug}><Link href={`/articles/${a.slug}/`}>{a.title}</Link></li>
+            ))}
+          </ul>
+        </nav>
+      )}
       <nav className="other-stations" aria-label="ほかの駅">
         <h2>ほかの駅</h2>
         <ul>
