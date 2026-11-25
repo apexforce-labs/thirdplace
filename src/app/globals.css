@@ -695,7 +695,7 @@ a.purpose-card:hover { transform: translateY(-3px); box-shadow: 6px 6px 0 var(--
 .art-box { margin-top: 22px; border: 2px solid var(--ink); border-radius: 18px; padding: 16px 18px 18px; background: var(--surface); }
 .article .art-box h2 { margin: 0; padding: 0; border: 0; display: flex; gap: 10px; align-items: center; font-size: 18px; }
 .art-box .art-ic { background: var(--bc); color: var(--ink); border-color: var(--ink); }
-.ic-power { --bc: var(--sand); } .ic-wifi { --bc: var(--mint); } .ic-clock { --bc: var(--lav); } .ic-seat { --bc: var(--rose); } .ic-smoke { --bc: var(--tint); } .ic-info { --bc: var(--tint); }
+.ic-power { --bc: var(--sand); } .ic-wifi { --bc: var(--mint); } .ic-clock { --bc: var(--lav); } .ic-seat { --bc: var(--rose); } .ic-smoke { --bc: var(--tint); } .ic-info { --bc: var(--tint); } .ic-dog { --bc: var(--rose); } .ic-terrace { --bc: var(--mint); } .ic-food { --bc: var(--sand); }
 .art-box ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
 .art-box li { position: relative; padding-left: 20px; font-size: 15px; line-height: 1.75; }
 .art-box li::before { content: ""; position: absolute; left: 4px; top: .7em; width: 8px; height: 8px; border-radius: 50%; background: var(--bc); border: 1.5px solid var(--ink); }

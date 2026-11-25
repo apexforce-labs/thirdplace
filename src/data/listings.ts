@@ -1,4 +1,5 @@
 import type { PurposeSlug } from "@/lib/types";
+import { stations } from "./stations";
 
 /**
  * 実在のお店（公開情報で確認したもの）。
@@ -37,6 +38,11 @@ export type Listing = {
   checkedAt: string; // 公開情報を確認した日 YYYY-MM-DD
   /** 現地で測った作業スコア（各1〜5）。測っていない項目は書かない。仮の値は入れない */
   scores?: Partial<Record<ScoreKey, number>>;
+  /** 犬と行くページ用。公式サイトに書かれている犬の同伴ルールだけを入れる */
+  dog?: {
+    where: "inside" | "terrace" | "ask"; // 店内OK／テラス席のみ／事前に相談
+    menu: boolean; // 犬用メニューが公式に書かれている
+  };
 };
 
 const RENOIR_WIFI = { label: "Renoir Miyama Wi-Fi（公式）", url: "https://ginza-renoir.co.jp/wifi_en", official: true };
@@ -1611,8 +1617,76 @@ export const listings: Listing[] = [
     note: "78席。全席禁煙で、カフェとして使えるのは17時半前まで。",
     checkedAt: "2026-11-25",
   },
+  /* ---------- 犬と行く（吉祥寺） ---------- */
+  {
+    id: "gyutan-ushisuke-kichijoji",
+    name: "牛たんうしすけ 吉祥寺店",
+    kind: "cafe",
+    station: "kichijoji",
+    purposes: ["dog"],
+    lat: 35.7025, lng: 139.5803,
+    address: "東京都武蔵野市吉祥寺南町1-1-9 FSビル3F",
+    access: "吉祥寺駅 南口（公園口）から徒歩約2分",
+    hours: "月〜金 17:00–22:00、土日祝 11:00–22:00（L.O. 21:30）。当面は水曜休み",
+    facts: [
+      { label: "犬の同伴", value: "店内OK（愛犬と一緒にテーブルを囲める席あり）", src: 0 },
+      { label: "犬用メニュー", value: "あり（獣医師監修の愛犬専用メニュー）", src: 0 },
+      { label: "予約", value: "犬と入れる席は数が限られるので予約がおすすめ", src: 0 },
+      { label: "席数", value: "全36席・全席禁煙", src: 0 },
+    ],
+    sources: [{ label: "牛たんうしすけ 吉祥寺店 公式サイト", url: "https://gyutanushisuke-kichijoji.foodre.jp/", official: true }],
+    note: "牛たん料理の店。平日は夜だけの営業なので、犬連れランチなら土日祝に。犬と入れる席は限られるので、予約して行くと確実。",
+    checkedAt: "2026-11-25",
+    dog: { where: "inside", menu: true },
+  },
+  {
+    id: "elmo-kichijoji",
+    name: "ELMO（エルモ）吉祥寺",
+    kind: "cafe",
+    station: "kichijoji",
+    purposes: ["dog"],
+    lat: 35.7016, lng: 139.5812,
+    address: "東京都武蔵野市吉祥寺南町1-8-10 エクセレンス吉祥寺 102",
+    access: "吉祥寺駅 南口から徒歩約3分",
+    hours: "ランチ 11:30–15:30（L.O. 14:30）、ディナー 17:00–23:30。木曜定休（祝日・祝前日は営業）",
+    facts: [
+      { label: "犬の同伴", value: "テラス席のみ（公式に「テラスでは、ペットと一緒に。」）", src: 0 },
+      { label: "予約", value: "事前の予約がおすすめ", src: 0 },
+      { label: "席", value: "テーブル席・カウンター・半個室・テラス", src: 0 },
+    ],
+    sources: [{ label: "ELMO 公式サイト（アクセス）", url: "https://elmokichijoji.com/access/", official: true }],
+    note: "犬と座れるのはテラス席だけ。店内には入れないので、寒い日や雨の日は注意。ランチとディナーの間（15:30〜17:00）は閉まっている。",
+    checkedAt: "2026-11-25",
+    dog: { where: "terrace", menu: false },
+  },
+  {
+    id: "88ya-kichijoji",
+    name: "八十八夜 吉祥寺",
+    kind: "cafe",
+    station: "kichijoji",
+    purposes: ["dog"],
+    lat: 35.7012, lng: 139.5822,
+    address: "東京都武蔵野市御殿山1-2-1 御殿山デュープレックスR'S 2階",
+    access: "吉祥寺駅 南口から徒歩約5分（井の頭公園方面）",
+    hours: "11:00–22:00（ランチ 11:00–16:00、ディナー 17:00–22:00）",
+    facts: [
+      { label: "犬の同伴", value: "「わんちゃん連れのご相談可」（席や条件は事前に店へ相談）", src: 0 },
+      { label: "席数", value: "店内52席・テラス8席", src: 0 },
+      { label: "Wi-Fi", value: "FREE Wi-Fi あり", src: 0 },
+    ],
+    sources: [{ label: "八十八夜 公式サイト", url: "https://88ya.jp/", official: true }],
+    note: "ビルの2階にある店。犬連れOKの範囲（店内かテラスか、大きさ）は公式に書かれていないので、行く前に電話で相談を。",
+    checkedAt: "2026-11-25",
+    dog: { where: "ask", menu: false },
+  },
 ];
 
 export const listingById = (id: string) => listings.find((l) => l.id === id);
+/** その目的のページを作る駅。カフェ作業は全駅、ほかの目的は掲載店がある駅だけ（空のページを作らない） */
+export const stationSlugsFor = (purpose: PurposeSlug) =>
+  purpose === "work"
+    ? stations.map((s) => s.slug)
+    : stations.map((s) => s.slug).filter((slug) => listings.some((l) => l.station === slug && l.purposes.includes(purpose)));
+
 export const listingsByStation = (slug: string, purpose?: PurposeSlug) =>
   listings.filter((l) => l.station === slug && (!purpose || l.purposes.includes(purpose)));

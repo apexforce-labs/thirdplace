@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
-import { stations } from "@/data/stations";
 import { articles } from "@/data/articles";
-import { listings } from "@/data/listings";
+import { listings, stationSlugsFor } from "@/data/listings";
 import { readyPurposes } from "@/lib/purposes";
 
 export const dynamic = "force-static";
@@ -14,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/privacy/` },
     { url: `${BASE}/contact/` },
     ...readyPurposes.map((p) => ({ url: `${BASE}/${p.slug}/` })),
-    ...readyPurposes.flatMap((p) => stations.map((s) => ({ url: `${BASE}/${p.slug}/${s.slug}/` }))),
+    ...readyPurposes.flatMap((p) => stationSlugsFor(p.slug).map((s) => ({ url: `${BASE}/${p.slug}/${s}/` }))),
     ...listings.map((l) => ({ url: `${BASE}/place/${l.id}/`, lastModified: l.checkedAt })),
     ...articles.map((a) => ({ url: `${BASE}/articles/${a.slug}/`, lastModified: a.publishedAt })),
   ];
