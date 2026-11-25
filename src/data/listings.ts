@@ -1611,6 +1611,47 @@ export const listings: Listing[] = [
     note: "78席。全席禁煙で、カフェとして使えるのは17時半前まで。",
     checkedAt: "2026-11-25",
   },
+  {
+    id: "slow-table-nakameguro",
+    name: "nakameguro SLOW TABLE",
+    kind: "cafe",
+    station: "nakameguro",
+    purposes: ["dog"],
+    lat: 35.6418, lng: 139.6965,
+    address: "東京都目黒区上目黒2-20-5 1F",
+    access: "東急東横線 中目黒駅から徒歩6分",
+    hours: "11:00–22:00（金・土・祝前日は22:30まで）、火曜定休・不定休あり",
+    facts: [
+      { label: "犬の同伴", value: "テラス席はOK。小型〜中型犬なら店内もOK", src: 0 },
+      { label: "犬用メニュー", value: "Dog's menu あり", src: 0 },
+      { label: "席数", value: "38席（ソファー席・テラス席あり）", src: 0 },
+      { label: "Wi-Fi", value: "無料Wi-Fiあり", src: 0 },
+    ],
+    sources: [
+      { label: "nakameguro SLOW TABLE 公式ページ（ぐるなび）", url: "https://e718202.gorp.jp/", official: true },
+    ],
+    note: "テラスのあるビストロカフェ。公式に「ワンちゃん連れで入店可能」と書かれていて、犬用のメニューもある。",
+    checkedAt: "2026-11-25",
+  },
+  {
+    id: "green-bean-to-bar-nakameguro",
+    name: "green bean to bar CHOCOLATE 中目黒本店",
+    kind: "cafe",
+    station: "nakameguro",
+    purposes: ["dog"],
+    lat: 35.6475, lng: 139.6935,
+    address: "東京都目黒区青葉台2-16-11",
+    access: "東急東横線 中目黒駅から徒歩10分",
+    hours: "毎日 10:00–20:00（年末年始を除く）",
+    facts: [
+      { label: "犬の同伴", value: "カフェスペースの前方の席のみOK（中目黒本店だけ）", src: 0 },
+    ],
+    sources: [
+      { label: "green bean to bar CHOCOLATE 公式 店舗ページ", url: "https://greenchocolate.jp/visit-our-cafe/", official: true },
+    ],
+    note: "チョコレート専門店のカフェ。犬と座れるのは、公式に書かれているとおりカフェの前方の席だけ。",
+    checkedAt: "2026-11-25",
+  },
 ];
 
 export const listingById = (id: string) => listings.find((l) => l.id === id);

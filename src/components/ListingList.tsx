@@ -17,6 +17,7 @@ export function ListingList({ items }: { items: Listing[] }) {
       {items.map((l, i) => {
         const power = pickFact(l, "電源");
         const wifi = pickFact(l, "Wi-Fi");
+        const dog = pickFact(l, "犬の同伴");
         return (
           <li key={l.id}>
             <Link href={`/place/${l.id}/`} className="listing-card" id={`listing-${l.id}`}>
@@ -25,6 +26,7 @@ export function ListingList({ items }: { items: Listing[] }) {
               <p className="sub">{KIND[l.kind]}・{l.access}</p>
               <ul className="facts">
                 <li><b>営業</b>{l.hours}</li>
+                {dog && <li><b>犬</b>{dog}</li>}
                 {power && <li><b>電源</b>{power}</li>}
                 {wifi && <li><b>Wi-Fi</b>{wifi}</li>}
               </ul>

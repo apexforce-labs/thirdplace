@@ -47,6 +47,8 @@ export type Article = {
   title: string;
   lead: string;
   station?: string;
+  /** どの目的の記事か（省略時は work） */
+  purpose?: PurposeSlug;
   publishedAt: string;
   readMin: number;
   /** 本文。h＋points（箇条書き）を四角の枠で表示する。p は短い補足だけに使う */

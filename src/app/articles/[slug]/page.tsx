@@ -33,7 +33,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <h1>{a.title}</h1>
         {station && (
           <div className="art-hero">
-            <PurposeArt slug="work" />
+            <PurposeArt slug={a.purpose ?? "work"} />
             <span className="art-hero-chip">{station.name}駅</span>
           </div>
         )}
@@ -59,7 +59,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         })}
         {a.station && (
           <p style={{ marginTop: 36 }}>
-            <Link href={`/work/${a.station}/`} className="btn">{station ? `${station.name}駅の作業カフェをすべて見る` : "地図で探す"}</Link>
+            <Link href={`/${a.purpose ?? "work"}/${a.station}/`} className="btn">{station ? `${station.name}駅の${a.purpose === "dog" ? "犬と入れるカフェ" : "作業カフェ"}をすべて見る` : "地図で探す"}</Link>
           </p>
         )}
       </article>
