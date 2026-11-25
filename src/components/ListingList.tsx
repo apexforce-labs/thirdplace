@@ -32,7 +32,6 @@ export function ListingList({ items }: { items: Listing[] }) {
                 {isWork && power && <li><b>電源</b>{power}</li>}
                 {isWork && wifi && <li><b>Wi-Fi</b>{wifi}</li>}
               </ul>
-              {isWork && <span className="pending-tag">スコア調査待ち</span>}
             </Link>
           </li>
         );

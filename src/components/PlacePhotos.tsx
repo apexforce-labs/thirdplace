@@ -28,6 +28,5 @@ export function PlacePhotos({ l }: { l: Listing }) {
       </section>
     );
   }
-  // 写真がない店は枠ごと出さない（「あとで載せます」のような予告は書かない）
   return null;
 }
