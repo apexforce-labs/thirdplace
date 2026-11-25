@@ -14,6 +14,8 @@ export const stations: Station[] = [
   { slug: "yokohama", romaji: "Yokohama", lineColor: "#00B2E5", name: "横浜", kana: "よこはま", lines: ["JR東海道線", "東急東横線", "相鉄線"], lat: 35.4658, lng: 139.6223, blurb: "西口と東口で商業施設が分かれる。乗り換えついでに寄りやすい。" },
   { slug: "takadanobaba", romaji: "Takadanobaba", lineColor: "#80C241", name: "高田馬場", kana: "たかだのばば", lines: ["JR山手線", "西武新宿線", "東京メトロ東西線"], lat: 35.7128, lng: 139.7038, blurb: "大学や専門学校が多い学生の街。早稲田通り沿いに店が集まる。" },
   { slug: "gotanda", romaji: "Gotanda", lineColor: "#80C241", name: "五反田", kana: "ごたんだ", lines: ["JR山手線", "東急池上線", "都営浅草線"], lat: 35.6262, lng: 139.7236, blurb: "スタートアップのオフィスが多いエリア。西口側に店が多い。" },
+  { slug: "ochanomizu", romaji: "Ochanomizu", lineColor: "#F15A22", name: "御茶ノ水", kana: "おちゃのみず", lines: ["JR中央線", "JR総武線", "東京メトロ丸ノ内線"], lat: 35.6996, lng: 139.765, blurb: "大学や予備校が多い学生の街。神保町まで歩いて回れる。" },
+  { slug: "tamachi", romaji: "Tamachi", lineColor: "#80C241", name: "田町", kana: "たまち", lines: ["JR山手線", "JR京浜東北線", "都営三田線（三田駅）"], lat: 35.6457, lng: 139.7476, blurb: "大学とオフィスが集まるエリア。西口は三田側、東口は芝浦側。" },
 ];
 
 export const stationBySlug = (slug: string) => stations.find((s) => s.slug === slug);
