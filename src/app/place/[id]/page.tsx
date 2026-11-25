@@ -31,7 +31,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
     <div className="wrap place">
       <nav className="crumbs" aria-label="パンくず">
         <Link href="/">トップ</Link><span>/</span>
-        <Link href={`/${l.purposes[0]}/${st.slug}/`}>{st.name}駅</Link><span>/</span>
+        <Link href={`/work/${st.slug}/`}>{st.name}駅</Link><span>/</span>
         <span>{l.name}</span>
       </nav>
       <header className="spot-head">

@@ -2,20 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
-import { stationBySlug } from "@/data/stations";
+import { stationBySlug, stations } from "@/data/stations";
 import { purposeBySlug, readyPurposes } from "@/lib/purposes";
 import type { PurposeSlug } from "@/lib/types";
 import { ListingList } from "@/components/ListingList";
 import { ListingMap } from "@/components/ListingMap";
 import { listingsByStation } from "@/data/listings";
 import { articles } from "@/data/articles";
-import { STATION_COPY, stationsFor } from "@/lib/purposeStations";
 
 type Params = Promise<{ purpose: string; station: string }>;
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return readyPurposes.flatMap((p) => stationsFor(p).map((s) => ({ purpose: p.slug, station: s.slug })));
+  return readyPurposes.flatMap((p) => stations.map((s) => ({ purpose: p.slug, station: s.slug })));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -23,10 +22,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const p = purposeBySlug(purpose); const st = stationBySlug(station);
   if (!p || !st) return {};
   const n = listingsByStation(st.slug, p.slug as PurposeSlug).length;
-  const c = STATION_COPY[p.slug as PurposeSlug];
   return {
-    title: c.title(st.name, n),
-    description: c.desc(st.name),
+    title: `${st.name}駅の電源・Wi-Fiのある作業カフェ${n > 0 ? ` ${n}店` : ""}｜公式情報で確認`,
+    description: `${st.name}駅周辺で作業できるカフェを、電源・Wi-Fi・席数・営業時間を公式情報で確かめてまとめました。`,
     alternates: { canonical: `/${p.slug}/${st.slug}/` },
   };
 }
@@ -36,9 +34,7 @@ export default async function Page({ params }: { params: Params }) {
   const p = purposeBySlug(purpose); const st = stationBySlug(station);
   if (!p?.ready || !st) notFound();
   const items = listingsByStation(st.slug, p.slug as PurposeSlug);
-  const related = articles.filter((a) => a.station === st.slug && (a.purpose ?? "work") === p.slug);
-  const c = STATION_COPY[p.slug as PurposeSlug];
-  const others = stationsFor(p).filter((s) => s.slug !== st.slug);
+  const related = articles.filter((a) => a.station === st.slug);
   return (
     <div className="wrap station-page">
       <nav className="crumbs" aria-label="パンくず">
@@ -51,7 +47,7 @@ export default async function Page({ params }: { params: Params }) {
         </div>
         <p className="blurb">{st.blurb}</p>
         <p className="muted">
-          {c.note(items.length)}
+          {items.length}店。電源・Wi-Fi・席数・営業時間は各店の公式情報で確かめたものです。
         </p>
       </header>
       <div className="station-layout">
@@ -68,16 +64,14 @@ export default async function Page({ params }: { params: Params }) {
           </ul>
         </nav>
       )}
-      {others.length > 0 && (
       <nav className="other-stations" aria-label="ほかの駅">
         <h2>ほかの駅</h2>
         <ul>
-          {others.map((s) => (
+          {stations.filter((s) => s.slug !== st.slug).map((s) => (
             <li key={s.slug}><Link href={`/${p.slug}/${s.slug}/`}>{s.name}<span className="num">{listingsByStation(s.slug, p.slug as PurposeSlug).length}</span></Link></li>
           ))}
         </ul>
       </nav>
-      )}
     </div>
   );
 }
