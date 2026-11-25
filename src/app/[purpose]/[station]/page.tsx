@@ -47,7 +47,7 @@ export default async function Page({ params }: { params: Params }) {
         </div>
         <p className="blurb">{st.blurb}</p>
         <p className="muted">
-          {items.length}店。電源・Wi-Fi・席数・営業時間は各店の公式情報で確かめたものです（スコアは現地で測ってから付けます）。
+          {items.length}店。電源・Wi-Fi・席数・営業時間は各店の公式情報で確かめたものです。
         </p>
       </header>
       <div className="station-layout">

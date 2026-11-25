@@ -22,15 +22,15 @@ export function ScoreRadar({ scores }: { scores: Listing["scores"] }) {
   });
   const measured = vals.filter((v) => v !== null).length;
   const complete = measured === SCORE_AXES.length;
+  // まだ1項目も測っていない店では、チャート自体を出さない
+  if (measured === 0) return null;
   const summary = SCORE_AXES.map((a, i) => `${a.label} ${vals[i] === null ? "未計測" : `5段階中${vals[i]}`}`).join("、");
 
   return (
     <figure className="score-radar panel">
       <figcaption>
         <b>作業スコア</b>
-        {measured === 0 ? (
-          <span className="pending-tag">調査待ち</span>
-        ) : !complete ? (
+        {!complete ? (
           <span className="pending-tag">{SCORE_AXES.length - measured}項目 未計測</span>
         ) : null}
       </figcaption>

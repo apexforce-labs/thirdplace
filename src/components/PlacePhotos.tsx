@@ -28,9 +28,5 @@ export function PlacePhotos({ l }: { l: Listing }) {
       </section>
     );
   }
-  return (
-    <section className="place-photos empty" aria-label="お店の写真">
-      <p>写真は現地調査のときに撮影して載せます。</p>
-    </section>
-  );
+  return null;
 }
