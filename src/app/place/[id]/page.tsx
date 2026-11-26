@@ -16,9 +16,12 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const l = listingById((await params).id);
   if (!l) return {};
   const st = stationBySlug(l.station)!;
+  const isDog = !l.purposes.includes("work") && l.purposes.includes("dog");
   return {
-    title: `${l.name}（${st.name}）｜電源・Wi-Fi・営業時間`,
-    description: `${l.name}の電源・Wi-Fi・営業時間・アクセス。${l.access}。`,
+    title: isDog ? `${l.name}（${st.name}）｜犬連れのルール・営業時間` : `${l.name}（${st.name}）｜電源・Wi-Fi・営業時間`,
+    description: isDog
+      ? `${l.name}の犬連れのルール（店内・テラス）、営業時間、アクセス。${l.access}。`
+      : `${l.name}の電源・Wi-Fi・営業時間・アクセス。${l.access}。`,
     alternates: { canonical: `/place/${l.id}/` },
   };
 }
@@ -27,11 +30,13 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
   const l = listingById((await params).id);
   if (!l) notFound();
   const st = stationBySlug(l.station)!;
+  const purpose = l.purposes[0] ?? "work";
+  const isWork = l.purposes.includes("work");
   return (
     <div className="wrap place">
       <nav className="crumbs" aria-label="パンくず">
         <Link href="/">トップ</Link><span>/</span>
-        <Link href={`/work/${st.slug}/`}>{st.name}駅</Link><span>/</span>
+        <Link href={`/${purpose}/${st.slug}/`}>{st.name}駅</Link><span>/</span>
         <span>{l.name}</span>
       </nav>
       <header className="spot-head">
@@ -46,7 +51,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
       <div className="spot-layout">
         <div>
           <PlacePhotos l={l} />
-          <ScoreRadar scores={l.scores} />
+          {isWork && <ScoreRadar scores={l.scores} />}
           <section className="detail panel" aria-label="確認できた情報">
             <dl>
               <dt>住所</dt><dd>{l.address}</dd>
@@ -78,7 +83,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
           <GoogleMapEmbed name={l.name} address={l.address} />
           <div className="side-card panel">
             <b>行ってみた方へ</b>
-            <span>電源の場所やWi-Fiの速さ、混み具合を教えてください。確認してスコアに反映します。</span>
+            <span>{isWork ? "電源の場所やWi-Fiの速さ、混み具合を教えてください。確認してスコアに反映します。" : "犬連れのルールが変わっていたら教えてください。公式サイトで確かめて直します。"}</span>
             <Link href="/submit/" className="btn white">情報を送る</Link>
           </div>
         </aside>

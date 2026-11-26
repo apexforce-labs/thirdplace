@@ -14,6 +14,7 @@ export function SiteHeader() {
           </Link>
           <nav className="nav" aria-label="メイン">
             <Link href="/work/" className="hide-sm">カフェ作業</Link>
+            <Link href="/dog/" className="hide-sm">犬と行く</Link>
             <Link href="/articles/" className="hide-sm">読みもの</Link>
             <Link href="/submit/" className="btn">お店を教える</Link>
           </nav>

@@ -27,6 +27,12 @@ export function ArtIcon({ name }: { name: ArticleIcon | "store" }) {
       return <svg {...ic}><path d="M7 4v8h10" /><path d="M5 12h14" /><path d="M7 12v8M17 12v8" /></svg>;
     case "smoke":
       return <svg {...ic}><rect x="2.5" y="13" width="15" height="4" rx="1" /><path d="M20 13v4M21.5 9c0-2-1.5-2.5-1.5-4" /></svg>;
+    case "dog":
+      return <svg {...ic}><path d="M5 9.5 4 5l4 2h6l4-2-1 4.5" /><path d="M5 9.5C5 15 8 19 12 19s7-4 7-9.5" /><circle cx="9.5" cy="12" r=".9" fill="currentColor" /><circle cx="14.5" cy="12" r=".9" fill="currentColor" /><path d="M11 15.5h2" /></svg>;
+    case "terrace":
+      return <svg {...ic}><path d="M3 9 12 4l9 5z" /><path d="M12 9v11" /><path d="M7 20v-5h10v5" /></svg>;
+    case "food":
+      return <svg {...ic}><path d="M4 12h16a8 8 0 0 1-16 0z" /><path d="M9 8c0-2 1.5-2 1.5-4M14 8c0-2 1.5-2 1.5-4" /></svg>;
     case "store":
       return <svg {...ic}><path d="M4 9.5 5.5 4h13L20 9.5" /><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0" /><path d="M5.5 11.5V20h13v-8.5" /><path d="M10 20v-4.5h4V20" /></svg>;
     default:
@@ -109,6 +115,62 @@ export function ArticleBox({ h, icon = "info", points, p }: { h?: string; icon?:
         <ul>{points.map((t, i) => <li key={i}>{t}</li>)}</ul>
       )}
       {p && <p>{p}</p>}
+    </section>
+  );
+}
+
+const DOG_WHERE = { inside: "店内OK", terrace: "テラスのみ", ask: "事前に相談" } as const;
+
+/** 犬と行く記事の「ひと目でわかる」。公式サイトに書かれている犬連れのルールから数える */
+export function DogSummary({ items }: { items: Listing[] }) {
+  if (items.length === 0) return null;
+  const count = (w: keyof typeof DOG_WHERE) => items.filter((l) => l.dog?.where === w).length;
+  const tiles = [
+    { icon: "store" as const, tone: "lav", label: "掲載店", value: items.length },
+    { icon: "dog" as const, tone: "rose", label: "店内OK", value: count("inside") },
+    { icon: "terrace" as const, tone: "mint", label: "テラスのみ", value: count("terrace") },
+    { icon: "food" as const, tone: "sand", label: "犬用メニューあり", value: items.filter((l) => l.dog?.menu).length },
+  ];
+  return (
+    <section className="art-summary" aria-label="ひと目でわかるまとめ">
+      <p className="art-summary-title">ひと目でわかる</p>
+      <ul>
+        {tiles.map((t) => (
+          <li key={t.label} className={`tone-${t.tone}`}>
+            <span className="art-ic"><ArtIcon name={t.icon} /></span>
+            <span className="art-tile-label">{t.label}</span>
+            <span className="art-tile-value num">{t.value}<small>店</small></span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/** 犬と行く記事の比較表（犬が入れる場所・犬用メニュー・席数） */
+export function DogCompare({ items }: { items: Listing[] }) {
+  if (items.length === 0) return null;
+  return (
+    <section className="art-compare" aria-label="お店の比較">
+      <p className="art-summary-title">お店をくらべる</p>
+      <div className="art-table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">お店</th><th scope="col">犬が入れる場所</th><th scope="col">犬用メニュー</th><th scope="col">席数</th></tr>
+          </thead>
+          <tbody>
+            {items.map((l, i) => (
+              <tr key={l.id}>
+                <th scope="row"><a href={`#listing-${l.id}`}><span className="art-no num">{i + 1}</span>{l.name}</a></th>
+                <td>{l.dog ? DOG_WHERE[l.dog.where] : <span className="mk mk-no" aria-label="記載なし">—</span>}</td>
+                <td><Mark ok={!!l.dog?.menu} /></td>
+                <td className="num">{seatsOf(l) ?? <span className="mk mk-no" aria-label="記載なし">—</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="art-note">お店の公式サイトに書かれている内容です。「事前に相談」は、行く前にお店へ確認が必要なお店です。</p>
     </section>
   );
 }

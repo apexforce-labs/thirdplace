@@ -47,10 +47,12 @@ export type Article = {
   title: string;
   lead: string;
   station?: string;
+  /** 記事の目的（未指定はカフェ作業） */
+  purpose?: PurposeSlug;
   publishedAt: string;
   readMin: number;
   /** 本文。h＋points（箇条書き）を四角の枠で表示する。p は短い補足だけに使う */
   body: { h?: string; icon?: ArticleIcon; p?: string; points?: string[]; listings?: string[] }[];
 };
 
-export type ArticleIcon = "power" | "wifi" | "clock" | "seat" | "smoke" | "info";
+export type ArticleIcon = "power" | "wifi" | "clock" | "seat" | "smoke" | "info" | "dog" | "terrace" | "food";

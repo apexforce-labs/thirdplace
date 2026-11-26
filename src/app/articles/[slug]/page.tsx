@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { articleBySlug, articles } from "@/data/articles";
 import { listingById } from "@/data/listings";
 import { ListingList } from "@/components/ListingList";
-import { ArticleBox, ArticleCompare, ArticleSummary } from "@/components/ArticleParts";
+import { ArticleBox, ArticleCompare, ArticleSummary, DogCompare, DogSummary } from "@/components/ArticleParts";
 import { PurposeArt } from "@/components/PurposeArt";
 import { stationBySlug } from "@/data/stations";
 
@@ -22,6 +22,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const a = articleBySlug((await params).slug);
   if (!a) notFound();
   const station = a.station ? stationBySlug(a.station) : undefined;
+  const purpose = a.purpose ?? "work";
   const shopIds = [...new Set(a.body.flatMap((b) => b.listings ?? []))];
   const shops = shopIds.map((id) => listingById(id)).filter((l) => l !== undefined);
   return (
@@ -33,7 +34,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <h1>{a.title}</h1>
         {station && (
           <div className="art-hero">
-            <PurposeArt slug="work" />
+            <PurposeArt slug={purpose} />
             <span className="art-hero-chip">{station.name}駅</span>
           </div>
         )}
@@ -41,8 +42,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <p className="meta num"><span>{a.publishedAt.replaceAll("-", ".")}</span><span>{a.readMin}分で読めます</span></p>
         {shops.length > 0 && (
           <>
-            <ArticleSummary items={shops} />
-            <ArticleCompare items={shops} />
+            {purpose === "dog" ? <DogSummary items={shops} /> : <ArticleSummary items={shops} />}
+            {purpose === "dog" ? <DogCompare items={shops} /> : <ArticleCompare items={shops} />}
           </>
         )}
         {a.body.map((b, i) => {
@@ -59,7 +60,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         })}
         {a.station && (
           <p style={{ marginTop: 36 }}>
-            <Link href={`/work/${a.station}/`} className="btn">{station ? `${station.name}駅の作業カフェをすべて見る` : "地図で探す"}</Link>
+            <Link href={`/${purpose}/${a.station}/`} className="btn">
+              {station ? (purpose === "dog" ? `${station.name}駅で犬と入れるお店をすべて見る` : `${station.name}駅の作業カフェをすべて見る`) : "地図で探す"}
+            </Link>
           </p>
         )}
       </article>

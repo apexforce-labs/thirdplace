@@ -25,7 +25,7 @@ export default function Home() {
               どこで<em>過ごそう</em>。
             </h1>
             <p className="hero2-lead">
-              電源はある？ Wi-Fiは？ 何時まで？ 作業できるカフェを、各店の公式情報で確かめて東京の駅ごとにまとめました。犬と行けるお店も準備中です。
+              電源はある？ Wi-Fiは？ 何時まで？ 作業できるカフェを、各店の公式情報で確かめて東京の駅ごとにまとめました。犬と入れるお店も、公式サイトで犬連れOKを確かめて載せはじめました。
             </p>
             <div className="answers" role="list" aria-label="目的をえらぶ">
               {PURPOSES.map((p) => {
