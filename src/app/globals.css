@@ -708,3 +708,5 @@ a.purpose-card:hover { transform: translateY(-3px); box-shadow: 6px 6px 0 var(--
 .station-articles ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .station-articles a { display: block; padding: 14px 16px; border: 2px solid var(--ink); border-radius: 14px; background: var(--bg); font-weight: 700; line-height: 1.5; box-shadow: 3px 3px 0 var(--ink); }
 .station-articles a:hover { transform: translate(-1px, -1px); }
+.dog-panel h2 { margin: 0; padding: 14px 20px; font-size: 15px; border-bottom: 1.5px solid var(--hair); }
+.dog-panel dd a { font-size: 13px; text-decoration: underline; }

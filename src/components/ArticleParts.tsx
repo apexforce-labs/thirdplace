@@ -1,5 +1,6 @@
 import type { ArticleIcon } from "@/lib/types";
 import type { Listing } from "@/data/listings";
+import { DOG_WHERE } from "@/lib/dog";
 
 const fact = (l: Listing, label: string) => l.facts.find((f) => f.label === label)?.value;
 /** 公式に「ある」と書かれているか（記載なし・紹介記事だけの情報は数えない） */
@@ -119,17 +120,18 @@ export function ArticleBox({ h, icon = "info", points, p }: { h?: string; icon?:
   );
 }
 
-const DOG_WHERE = { inside: "店内OK", terrace: "テラスのみ", ask: "事前に相談" } as const;
 
 /** 犬と行く記事の「ひと目でわかる」。公式サイトに書かれている犬連れのルールから数える */
 export function DogSummary({ items }: { items: Listing[] }) {
   if (items.length === 0) return null;
   const count = (w: keyof typeof DOG_WHERE) => items.filter((l) => l.dog?.where === w).length;
+  const parking = items.filter((l) => l.dog?.parking === "own").length;
   const tiles = [
     { icon: "store" as const, tone: "lav", label: "掲載店", value: items.length },
-    { icon: "dog" as const, tone: "rose", label: "店内OK", value: count("inside") },
+    { icon: "dog" as const, tone: "rose", label: "店内もOK", value: count("inside") },
     { icon: "terrace" as const, tone: "mint", label: "テラスのみ", value: count("terrace") },
-    { icon: "food" as const, tone: "sand", label: "犬用メニューあり", value: items.filter((l) => l.dog?.menu).length },
+    { icon: "food" as const, tone: "sand", label: "犬ごはんあり", value: items.filter((l) => l.dog?.menu).length },
+    { icon: "info" as const, tone: "lav", label: "お店の駐車場あり", value: parking },
   ];
   return (
     <section className="art-summary" aria-label="ひと目でわかるまとめ">
@@ -156,7 +158,7 @@ export function DogCompare({ items }: { items: Listing[] }) {
       <div className="art-table-wrap">
         <table>
           <thead>
-            <tr><th scope="col">お店</th><th scope="col">犬が入れる場所</th><th scope="col">犬用メニュー</th><th scope="col">席数</th></tr>
+            <tr><th scope="col">お店</th><th scope="col">犬が入れる場所</th><th scope="col">犬ごはん</th><th scope="col">駐車場</th></tr>
           </thead>
           <tbody>
             {items.map((l, i) => (
@@ -164,13 +166,13 @@ export function DogCompare({ items }: { items: Listing[] }) {
                 <th scope="row"><a href={`#listing-${l.id}`}><span className="art-no num">{i + 1}</span>{l.name}</a></th>
                 <td>{l.dog ? DOG_WHERE[l.dog.where] : <span className="mk mk-no" aria-label="記載なし">—</span>}</td>
                 <td><Mark ok={!!l.dog?.menu} /></td>
-                <td className="num">{seatsOf(l) ?? <span className="mk mk-no" aria-label="記載なし">—</span>}</td>
+                <td>{l.dog?.parking === "own" ? "あり" : l.dog?.parking === "none" ? "なし" : <span className="mk mk-no" aria-label="記載なし">—</span>}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p className="art-note">お店の公式サイトに書かれている内容です。「事前に相談」は、行く前にお店へ確認が必要なお店です。</p>
+      <p className="art-note">お店の公式サイトに書かれている内容です。✓＝あり　—＝公式に記載なし。「要相談」は、行く前にお店へ確認が必要なお店です。近くのコインパーキングは各店のページの地図から探せます。</p>
     </section>
   );
 }

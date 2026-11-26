@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Listing } from "@/data/listings";
+import { DOG_WHERE, dogMenuText, dogParkingText } from "@/lib/dog";
 
 const KIND: Record<Listing["kind"], string> = { cafe: "カフェ", lounge: "ラウンジ", coworking: "コワーキング" };
 const pickFact = (l: Listing, label: string) => l.facts.find((f) => f.label === label)?.value;
@@ -27,8 +28,15 @@ export function ListingList({ items }: { items: Listing[] }) {
               <p className="sub">{KIND[l.kind]}・{l.access}</p>
               <ul className="facts">
                 <li><b>営業</b>{l.hours}</li>
-                {dog && <li><b>犬</b>{dog}</li>}
-                {l.dog?.menu && <li><b>犬メニュー</b>あり</li>}
+                {l.dog ? (
+                  <>
+                    <li><b>犬</b>{DOG_WHERE[l.dog.where]}（{l.dog.whereNote}）</li>
+                    <li><b>犬ごはん</b>{dogMenuText(l.dog)}</li>
+                    <li><b>駐車場</b>{dogParkingText(l.dog)}</li>
+                  </>
+                ) : (
+                  dog && <li><b>犬</b>{dog}</li>
+                )}
                 {isWork && power && <li><b>電源</b>{power}</li>}
                 {isWork && wifi && <li><b>Wi-Fi</b>{wifi}</li>}
               </ul>
