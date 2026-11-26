@@ -40,8 +40,12 @@ export type Listing = {
   scores?: Partial<Record<ScoreKey, number>>;
   /** 犬と行くページ用。公式サイトに書かれている犬の同伴ルールだけを入れる */
   dog?: {
-    where: "inside" | "terrace" | "ask"; // 店内OK／テラス席のみ／事前に相談
-    menu: boolean; // 犬用メニューが公式に書かれている
+    where: "inside" | "terrace" | "ask"; // 店内もOK／テラス席のみ／事前に相談
+    /** 入れる場所のくわしい条件（公式の書き方に合わせる） */
+    whereNote: string;
+    menu: boolean; // 犬用ごはん・メニューが公式に書かれている
+    /** お店の駐車場。none＝公式に「なし」、unknown＝公式に記載なし */
+    parking: "own" | "none" | "unknown";
   };
 };
 
@@ -1637,7 +1641,7 @@ export const listings: Listing[] = [
     sources: [{ label: "牛たんうしすけ 吉祥寺店 公式サイト", url: "https://gyutanushisuke-kichijoji.foodre.jp/", official: true }],
     note: "牛たん料理の店。平日は夜だけの営業なので、犬連れランチなら土日祝に。犬と入れる席は限られるので、予約して行くと確実。",
     checkedAt: "2026-11-25",
-    dog: { where: "inside", menu: true },
+    dog: { where: "inside", whereNote: "店内OK（愛犬と一緒に座れる席は数に限りあり）", menu: true, parking: "unknown" },
   },
   {
     id: "elmo-kichijoji",
@@ -1657,7 +1661,7 @@ export const listings: Listing[] = [
     sources: [{ label: "ELMO 公式サイト（アクセス）", url: "https://elmokichijoji.com/access/", official: true }],
     note: "犬と座れるのはテラス席だけ。店内には入れないので、寒い日や雨の日は注意。ランチとディナーの間（15:30〜17:00）は閉まっている。",
     checkedAt: "2026-11-25",
-    dog: { where: "terrace", menu: false },
+    dog: { where: "terrace", whereNote: "テラス席のみ", menu: false, parking: "unknown" },
   },
   {
     id: "88ya-kichijoji",
@@ -1677,7 +1681,7 @@ export const listings: Listing[] = [
     sources: [{ label: "八十八夜 公式サイト", url: "https://88ya.jp/", official: true }],
     note: "ビルの2階にある店。犬連れOKの範囲（店内かテラスか、大きさ）は公式に書かれていないので、行く前に電話で相談を。",
     checkedAt: "2026-11-25",
-    dog: { where: "ask", menu: false },
+    dog: { where: "ask", whereNote: "「わんちゃん連れのご相談可」。店内か、テラス（8席）かは事前に相談", menu: false, parking: "unknown" },
   },
   /* ---------- 犬と行く（中目黒） ---------- */
   {
@@ -1695,13 +1699,14 @@ export const listings: Listing[] = [
       { label: "犬用メニュー", value: "Dog's menu あり", src: 0 },
       { label: "席数", value: "38席（ソファー席・テラス席あり）", src: 0 },
       { label: "Wi-Fi", value: "無料Wi-Fiあり", src: 0 },
+      { label: "駐車場", value: "なし", src: 0 },
     ],
     sources: [
       { label: "nakameguro SLOW TABLE 公式ページ（ぐるなび）", url: "https://e718202.gorp.jp/", official: true },
     ],
     note: "テラスのあるビストロカフェ。公式に「ワンちゃん連れで入店可能」と書かれていて、犬用のメニューもある。大型犬はテラス席で。",
     checkedAt: "2026-11-25",
-    dog: { where: "inside", menu: true },
+    dog: { where: "inside", whereNote: "テラス席はOK。小型〜中型犬なら店内もOK", menu: true, parking: "none" },
   },
   {
     id: "green-bean-to-bar-nakameguro",
@@ -1721,7 +1726,7 @@ export const listings: Listing[] = [
     ],
     note: "チョコレート専門店のカフェ。犬と座れるのは、公式に書かれているとおりカフェの前方の席だけ。",
     checkedAt: "2026-11-25",
-    dog: { where: "inside", menu: false },
+    dog: { where: "inside", whereNote: "カフェスペースの前方の席のみ", menu: false, parking: "unknown" },
   },
 ];
 

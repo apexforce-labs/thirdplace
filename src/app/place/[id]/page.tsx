@@ -6,6 +6,7 @@ import { stationBySlug } from "@/data/stations";
 import { PlacePhotos } from "@/components/PlacePhotos";
 import { GoogleMapEmbed } from "@/components/GoogleMapEmbed";
 import { ScoreRadar } from "@/components/ScoreRadar";
+import { DOG_WHERE, dogMenuText, dogParkingText, nearbyParkingUrl } from "@/lib/dog";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -52,6 +53,21 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
         <div>
           <PlacePhotos l={l} />
           {isWork && <ScoreRadar scores={l.scores} />}
+          {l.dog && (
+            <section className="detail panel dog-panel" aria-labelledby="dog-h">
+              <h2 id="dog-h">犬と行く前に</h2>
+              <dl>
+                <dt>犬が入れる場所</dt><dd><b>{DOG_WHERE[l.dog.where]}</b>　{l.dog.whereNote}</dd>
+                <dt>犬ごはん</dt><dd>{dogMenuText(l.dog)}</dd>
+                <dt>駐車場</dt>
+                <dd>
+                  {dogParkingText(l.dog)}
+                  <br />
+                  <a href={nearbyParkingUrl(l)} target="_blank" rel="noopener noreferrer">近くのコインパーキングを地図で見る</a>
+                </dd>
+              </dl>
+            </section>
+          )}
           <section className="detail panel" aria-label="確認できた情報">
             <dl>
               <dt>住所</dt><dd>{l.address}</dd>
